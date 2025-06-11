@@ -69,73 +69,69 @@ open class SoraStream : TmdbProvider() {
 
     /** AUTHOR : Hexated & Sora */
     companion object {
-        /** TOOLS */
-        private const val tmdbAPI = "https://api.themoviedb.org/3"
-        const val gdbot = "https://gdtot.pro"
-        const val anilistAPI = "https://graphql.anilist.co"
-        const val malsyncAPI = "https://api.malsync.moe"
-        const val jikanAPI = "https://api.jikan.moe/v4"
+    /** TOOLS */
+    private const val tmdbAPI = ApiConstants.TMDB_API
+    const val anilistAPI = ApiConstants.ANILIST_API
+    const val malsyncAPI = ApiConstants.MALSYNC_API
+    const val jikanAPI = ApiConstants.JIKAN_API
 
-        private const val apiKey = BuildConfig.TMDB_API
+    private const val apiKey = BuildConfig.TMDB_API
 
-        /** ALL SOURCES */
-        const val twoEmbedAPI = "https://www.2embed.cc"
-        const val vidSrcAPI = "https://vidsrc.me"
-        const val dreamfilmAPI = "https://dreamfilmsw.net"
-        const val noverseAPI = "https://www.nollyverse.com"
-        const val filmxyAPI = "https://www.filmxy.vip"
-        const val kimcartoonAPI = "https://kimcartoon.li"
-        const val hianimeAPI = "https://hianime.to"
-        const val aniwaveAPI = "https://aniwave.to"
-        const val crunchyrollAPI = "https://beta-api.crunchyroll.com"
-        const val kissKhAPI = "https://kisskh.co"
-        const val lingAPI = "https://ling-online.net"
-        const val m4uhdAPI = "https://ww1.streamm4u.ws"
-        const val rStreamAPI = "https://remotestream.cc"
-        const val flixonAPI = "https://flixon.lol"
-        const val smashyStreamAPI = "https://embed.smashystream.com"
-        const val watchSomuchAPI = "https://watchsomuch.tv" // sub only
-        const val cinemaTvAPI = BuildConfig.CINEMATV_API
-        const val nineTvAPI = "https://moviesapi.club"
-        const val nowTvAPI = "https://myfilestorage.xyz"
-        const val gokuAPI = "https://goku.sx"
-        const val zshowAPI = BuildConfig.ZSHOW_API
-        const val ridomoviesAPI = "https://ridomovies.tv"
-        const val emoviesAPI = "https://emovies.si"
-        const val multimoviesAPI = "https://multimovies.top"
-        const val multimovies2API = "https://multimovies.click"
-        const val netmoviesAPI = "https://netmovies.to"
-        const val allmovielandAPI = "https://allmovieland.fun"
-        const val doomoviesAPI = "https://doomovies.net"
-        const val vidsrctoAPI = "https://vidsrc.to"
-        const val dramadayAPI = "https://dramaday.me"
-        const val animetoshoAPI = "https://animetosho.org"
-        const val showflixAPI = "https://showflix.lol"
-        const val aoneroomAPI = "https://api3.aoneroom.com"
-        const val mMoviesAPI = "https://multimovies.uno"
-        const val watchCartoonAPI = "https://www1.watchcartoononline.bz"
-        const val moflixAPI = "https://moflix-stream.xyz"
-        const val zoechipAPI = "https://zoechip.org"
-        const val nepuAPI = "https://nepu.to"
-        const val fdMoviesAPI = "https://freedrivemovie.com"
-        const val uhdmoviesAPI = "https://uhdmovies.asia"
-        const val hdmovies4uAPI = "https://hdmovies4u.day"
-        const val vegaMoviesAPI = "https://vegamovies.ong"
-        const val dotmoviesAPI = "https://luxmovies.biz"
-        const val tvMoviesAPI = "https://www.tvseriesnmovies.com"
-        const val dahmerMoviesAPI = "https://odd-bird-1319.zwuhygoaqe.workers.dev"
+    /** ALL SOURCES */
+    const val twoEmbedAPI = ApiConstants.Sources.TWO_EMBED
+    const val vidSrcAPI = ApiConstants.Sources.VIDSRC
+    const val dreamfilmAPI = ApiConstants.Sources.DREAMFILM
+    const val filmxyAPI = ApiConstants.Sources.FILMXY
+    const val kimcartoonAPI = ApiConstants.Sources.KIMCARTOON
+    const val hianimeAPI = ApiConstants.Sources.HIANIME
+    const val aniwaveAPI = ApiConstants.Sources.ANI_WAVE
+    const val crunchyrollAPI = ApiConstants.Sources.CRUNCHYROLL
+    const val kissKhAPI = ApiConstants.Sources.KISSKH
+    const val lingAPI = ApiConstants.Sources.LING
+    const val m4uhdAPI = ApiConstants.Sources.M4UHD
+    const val rStreamAPI = ApiConstants.Sources.REMOTESTREAM
+    const val flixonAPI = ApiConstants.Sources.FLIXON
+    const val smashyStreamAPI = ApiConstants.Sources.SMASHY_STREAM
+    const val watchSomuchAPI = ApiConstants.Sources.WATCHSOMUCH
+    const val nineTvAPI = ApiConstants.Sources.NINETV
+    const val nowTvAPI = ApiConstants.Sources.NOWTV
+    const val gokuAPI = ApiConstants.Sources.GOKU
+    const val ridomoviesAPI = ApiConstants.Sources.RIDOMOVIES
+    const val emoviesAPI = ApiConstants.Sources.EMOVIES
+    const val multimoviesAPI = ApiConstants.Sources.MULTIMOVIES
+    const val multimovies2API = ApiConstants.Sources.MULTIMOVIES2
+    const val netmoviesAPI = ApiConstants.Sources.NETMOVIES
+    const val allmovielandAPI = ApiConstants.Sources.ALLMOVIELAND
+    const val doomoviesAPI = ApiConstants.Sources.DOOMOVIES
+    const val vidsrctoAPI = ApiConstants.Sources.VIDSRCTO
+    const val dramadayAPI = ApiConstants.Sources.DRAMADAY
+    const val showflixAPI = ApiConstants.Sources.SHOWFLIX
+    const val aoneroomAPI = ApiConstants.Sources.AONEROOM
+    const val watchCartoonAPI = ApiConstants.Sources.WATCHCARTOON
+    const val moflixAPI = ApiConstants.Sources.MOFLIX
+    const val zoechipAPI = ApiConstants.Sources.ZOECHIP
+    const val nepuAPI = ApiConstants.Sources.NEPU
+    const val fdMoviesAPI = ApiConstants.Sources.FDMOVIES
+    const val uhdmoviesAPI = ApiConstants.Sources.UHDMOVIES
+    const val hdmovies4uAPI = ApiConstants.Sources.HDMOVIES4U
+    const val vegaMoviesAPI = ApiConstants.Sources.VEGAMOVIES
+    const val dotmoviesAPI = ApiConstants.Sources.DOTMOVIES
+    const val tvMoviesAPI = ApiConstants.Sources.TVMOVIES
+    const val dahmerMoviesAPI = ApiConstants.Sources.DAHMERMOVIES
 
-        fun getType(t: String?): TvType {
-            return when (t) {
-                "movie" -> TvType.Movie
-                else -> TvType.TvSeries
-            }
+    fun getType(t: String?): TvType {
+        return when (t) {
+            "movie" -> TvType.Movie
+            else -> TvType.TvSeries
         }
+    }
 
-        fun getStatus(t: String?): ShowStatus {
-            return when (t) {
-                "Returning Series" -> ShowStatus.Ongoing
-                else -> ShowStatus.Completed
+    fun getStatus(t: String?): ShowStatus {
+        return when (t) {
+            "Returning Series" -> ShowStatus.Ongoing
+            else -> ShowStatus.Completed
+        
+
             }
         }
 
