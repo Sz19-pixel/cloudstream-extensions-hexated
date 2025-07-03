@@ -31,10 +31,7 @@ class StremioC : MainAPI() {
                 if (it.list.isNotEmpty()) lists.add(it)
             }
         }
-        return HomePageResponse(
-            lists,
-            false
-        )
+        return HomePageResponse(lists, false)
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
@@ -133,7 +130,6 @@ class StremioC : MainAPI() {
         @JsonProperty("lang") val lang: String,
     )
 
-    // check if id is imdb/tmdb cause stremio addons like torrentio works base on imdbId
     private fun isImdborTmdb(url: String?): Boolean {
         return imdbUrlToIdNullable(url) != null || url?.startsWith("tmdb:") == true
     }
@@ -165,15 +161,23 @@ class StremioC : MainAPI() {
 
         suspend fun toHomePageList(provider: StremioC): HomePageList {
             val entries = mutableListOf<SearchResponse>()
-            types.forEach { type ->
-                val res = app.get(
-                    "${provider.mainUrl}/catalog/${type}/${id}.json",
-                    timeout = 120L
-                ).parsedSafe<CatalogResponse>()
-                res?.metas?.forEach { entry ->
+            val pageSize = 20
+            var skip = 0
+
+            while (true) {
+                val url = "${provider.mainUrl}/catalog/${type}/${id}.json?skip=$skip"
+                val res = app.get(url, timeout = 120L).parsedSafe<CatalogResponse>()
+                val metas = res?.metas ?: break
+
+                if (metas.isEmpty()) break
+
+                metas.forEach { entry ->
                     entries.add(entry.toSearchResponse(provider))
                 }
+
+                skip += pageSize
             }
+
             return HomePageList(
                 "$type - ${name ?: id}",
                 entries
@@ -183,10 +187,7 @@ class StremioC : MainAPI() {
 
     private data class CatalogResponse(val metas: List<CatalogEntry>?, val meta: CatalogEntry?)
 
-    private data class Trailer(
-        val source: String?,
-        val type: String?
-    )
+    private data class Trailer(val source: String?, val type: String?)
 
     private data class CatalogEntry(
         @JsonProperty("name") val name: String,
@@ -252,7 +253,6 @@ class StremioC : MainAPI() {
                     addImdbId(imdbId)
                 }
             }
-
         }
     }
 
@@ -281,15 +281,10 @@ class StremioC : MainAPI() {
     }
 
     private data class StreamsResponse(val streams: List<Stream>)
-    private data class Subtitle(
-        val url: String?,
-        val lang: String?,
-        val id: String?,
-    )
 
-    private data class ProxyHeaders(
-        val request: Map<String, String>?,
-    )
+    private data class Subtitle(val url: String?, val lang: String?, val id: String?)
+
+    private data class ProxyHeaders(val request: Map<String, String>?)
 
     private data class BehaviorHints(
         val proxyHeaders: ProxyHeaders?,
@@ -319,7 +314,7 @@ class StremioC : MainAPI() {
                         fixSourceName(name, title),
                         url,
                         "",
-                        getQuality(listOf(description,title,name)),
+                        getQuality(listOf(description, title, name)),
                         headers = behaviorHints?.proxyHeaders?.request ?: behaviorHints?.headers
                         ?: mapOf(),
                         type = INFER_TYPE
